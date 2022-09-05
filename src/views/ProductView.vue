@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="main-container">
-      <h1>Productos!!!</h1>
+      <h1>Listado de Productos</h1>
       <div class="secondary-container">
         <div class="side-panel-container">
           <button @click="removeFilters()">Eliminar filtros</button>
@@ -53,7 +53,7 @@
           </div>
         </div>
         <div class="product-items-container">
-          <button @click="sendItemsToOffer()">Selecciona Items</button>
+          <button @click="createNewItem()">Crear Nuevo Item</button>
           <table class="products">
             <tr>
               <th>Id</th>
@@ -72,21 +72,9 @@
               <td>{{ item.discount }}</td>
               <td>{{ item.priceWithDiscount }}</td>
               <td>
-                <div class="center">
-                  <label class="label">
-                    <input
-                      class="label__checkbox"
-                      type="checkbox"
-                      :value="item.id"
-                      v-model="selectedItems"
-                    />
-                    <span class="label__text">
-                      <span class="label__check">
-                        <i class="fa fa-check icon"></i>
-                      </span>
-                    </span>
-                  </label>
-                </div>
+                <button @click="itemInfo(offer.id)">
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
               </td>
             </tr>
           </table>
@@ -97,7 +85,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 const DEFAULT_ORDER_BY = "title";
 const DEFAULT_DIR = "asc";
@@ -144,7 +132,6 @@ export default {
   },
   methods: {
     ...mapMutations(["setItems", "setCategories", "setFilteredItems"]),
-    ...mapActions(["updateOfferItems"]),
     selectCategory(categoryId) {
       this.selectedCategory = categoryId;
       this.page = DEFAULT_PAGE;
@@ -184,27 +171,10 @@ export default {
         this.setItemsFiltered();
       }
     },
-    previousItems() {
-      this.selectedItems = this.offer.offerItems.map(
-        (offerItem) => offerItem.item.id
-      );
-    },
-    sendItemsToOffer() {
-      this.updateOfferItems({
-        offerId: this.$route.params.id,
-        items: this.selectedItems,
-      });
-    },
   },
   created: function () {
-    try {
-      this.offer = this.$store.getters.getOfferById(this.$route.params.id);
-      this.setItems();
-      this.setCategories();
-      this.previousItems();
-    } catch (err) {
-      this.$router.push({ name: "offers" });
-    }
+    this.setItems();
+    this.setCategories();
   },
 };
 </script>

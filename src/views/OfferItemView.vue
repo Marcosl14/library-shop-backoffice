@@ -74,7 +74,7 @@
           <transition>
             <label
               class="error-label"
-              v-if="error.includes('PHOTO_MAX_LENGTH: 100')"
+              v-if="error.includes('PHOTO_MAX_LENGTH: 1000')"
             >
               El largo de la URL de la foto debe ser inferior a 100 caracteres.
             </label>
@@ -131,7 +131,7 @@
 
         <div>
           <h2>Acciones:</h2>
-          <div>
+          <div class="buttons-container">
             <button @click="undoChanges()">Deshacer</button>
             <button @click="addItems()">Agregar Productos</button>
             <button @click="saveChanges()">Guardar Cambios</button>
@@ -227,7 +227,7 @@ export default {
       error: "",
       title: "",
       description: "",
-      discount: 0,
+      discount: 1,
       photo: "",
     };
   },
@@ -484,6 +484,10 @@ export default {
 
 .quantity-container p {
   margin: 0px 10px;
+}
+
+.buttons-container button {
+  margin-right: 10px;
 }
 
 .error-label {

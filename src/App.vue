@@ -4,6 +4,7 @@
       <nav>
         <RouterLink to="/">Ofertas</RouterLink>
         <RouterLink to="/producto">Productos</RouterLink>
+        <RouterLink to="/categorias">Categorias</RouterLink>
       </nav>
     </div>
     <div>

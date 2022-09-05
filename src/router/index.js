@@ -4,6 +4,7 @@ import ProductSelection from "../views/ProductSelection.vue";
 import OfferItemView from "../views/OfferItemView.vue";
 import LogInView from "../views/LogInView.vue";
 import UserView from "../views/UserView.vue";
+import ProductView from "../views/ProductView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,11 +29,11 @@ const router = createRouter({
       name: "product-selection",
       component: ProductSelection,
     },
-    // {
-    //   path: "/producto/:id",
-    //   name: "product",
-    //   component: BuyItemView,
-    // }
+    {
+      path: "/producto",
+      name: "product",
+      component: ProductView,
+    },
     {
       path: "/iniciar-sesion",
       name: "log-in",
