@@ -4,31 +4,35 @@
       <h1>Listado de ofertas</h1>
       <button @click="createNewOffer()">Crear Nueva Oferta</button>
       <div class="offer-items-container">
-        <table>
-          <table class="products">
-            <tr>
-              <th>Id</th>
-              <th>Foto</th>
-              <th>Nombre</th>
-              <th>Precio</th>
-              <th>Descuento</th>
-              <th>Precio con descuento</th>
-              <th>Acciones</th>
-            </tr>
-            <tr v-for="offer in offers" :key="offer.id">
-              <td>{{ offer.id }}</td>
-              <td><img :src="offer.photo" :alt="offer.title" /></td>
-              <td>{{ firstLetterUpperCase(offer.title) }}</td>
-              <td>{{ offer.price }}</td>
-              <td>{{ offer.discount }}</td>
-              <td>{{ offer.priceWithDiscount }}</td>
-              <td>
-                <button @click="productInfo(offer.id)">
-                  <i class="fa-solid fa-pencil"></i>
-                </button>
-              </td>
-            </tr>
-          </table>
+        <table class="products">
+          <tr>
+            <th>Id</th>
+            <th>Foto</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descuento</th>
+            <th>Precio con descuento</th>
+            <th>Acciones</th>
+          </tr>
+          <tr v-for="offer in offers" :key="offer.id">
+            <td>{{ offer.id }}</td>
+            <td>
+              <img
+                :src="offer.photo"
+                :alt="offer.title"
+                class="product-photo"
+              />
+            </td>
+            <td>{{ firstLetterUpperCase(offer.title) }}</td>
+            <td>{{ offer.price }}</td>
+            <td>{{ offer.discount }}</td>
+            <td>{{ offer.priceWithDiscount }}</td>
+            <td>
+              <button @click="offerInfo(offer.id)">
+                <i class="fa-solid fa-pencil"></i>
+              </button>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
@@ -50,7 +54,7 @@ export default {
   },
   methods: {
     ...mapActions(["addNewOffer"]),
-    productInfo(id) {
+    offerInfo(id) {
       this.$router.push({ path: `/oferta/${id}` });
     },
     async createNewOffer() {
@@ -99,5 +103,9 @@ export default {
   text-align: left;
   background-color: #04aa6d;
   color: white;
+}
+
+.product-photo {
+  width: 400px;
 }
 </style>
